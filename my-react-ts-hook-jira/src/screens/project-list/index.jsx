@@ -1,6 +1,6 @@
 import React from "react";
-import { List } from "./list";
-import { SearchPanel } from "./search-panel";
+import { List } from "./list";  // 列表
+import { SearchPanel } from "./search-panel";  // 搜索
 import { useEffect, useState } from "react";
 import { cleanObject } from "../../utils/index";
 import qs from "qs";
@@ -18,7 +18,7 @@ export const ProjectListScreen = () => {
   const [list, setList] = useState([]);
 
   useEffect(() => {
-    // fetch(`${apiUrl}/projects?name=${param.name}&personId=${param.id}`).then
+    //用qs 代替多参数  fetch(`${apiUrl}/projects?name=${param.name}&personId=${param.id}`).then 
     fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(param))}`).then(async (response) => {
       if (response.ok) {
         setList(await response.json());
