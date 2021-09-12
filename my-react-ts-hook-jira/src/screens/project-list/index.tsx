@@ -12,7 +12,7 @@ export const ProjectListScreen = () => {
   const [users, setUsers] = useState([]);
 
   const [param, setParam] = useState({
-    name: "",
+    name: "", 
     personId: "",
   });
 

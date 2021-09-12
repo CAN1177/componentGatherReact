@@ -42,6 +42,7 @@
     ]
   },
   "devDependencies": {
+    "@types/qs": "^6.9.7",
     "@types/react": "^17.0.3",
     "express": "^4.17.1",
     "install": "^0.13.0",
