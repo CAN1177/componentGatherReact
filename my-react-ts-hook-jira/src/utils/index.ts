@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 // 前端避免改变传入的使用对象
-export const isFalse = (value: any) => value === 0 ? false : !value;
+export const isFalse = (value: unknown) => value === 0 ? false : !value;
 
 export const cleanObject = (object: object) =>{
 	const result = {...object}
@@ -21,10 +21,10 @@ export const cleanObject = (object: object) =>{
 export const useMount = (callback: ()=>void ) =>{
 	useEffect(()=>{
 		callback()
-	}, [])
+	}, [callback])
 }
 
-export const useDebounce = (value: any, delay: number) =>{
+export const useDebounce = <T>(value: T, delay: number) =>{
 	const [debouncedValue, setDebouncedValue] = useState(value);
 
   useEffect(() => {

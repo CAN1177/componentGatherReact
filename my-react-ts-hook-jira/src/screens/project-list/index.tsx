@@ -2,7 +2,7 @@ import React from "react";
 import { List } from "./list";  // 列表
 import { SearchPanel } from "./search-panel";  // 搜索
 import { useEffect, useState } from "react";
-import { cleanObject, useMount, useDebounce } from "../../utils/index";
+import { cleanObject, useMount, useDebounce } from "utils/index";
 import qs from "qs";
 
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -11,18 +11,23 @@ console.log('apiUrl: ', apiUrl);
 export const ProjectListScreen = () => {
   const [users, setUsers] = useState([]);
 
+  interface T {
+    name: string,
+    personId: string,
+  }
+
   const [param, setParam] = useState({
     name: "", 
     personId: "",
   });
 
-  const debouncedParams = useDebounce(param,1000)
+  const debouncedParams = useDebounce(param, 1000)
 
   const [list, setList] = useState([]);
 
   useEffect(() => {
     //用qs 代替多参数  fetch(`${apiUrl}/projects?name=${param.name}&personId=${param.id}`).then 
-    fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(debouncedParams))}`).then(async (response) => {
+    fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(debouncedParams))}`).then(async (response: Response) => {
       if (response.ok) {
         setList(await response.json());
       }
