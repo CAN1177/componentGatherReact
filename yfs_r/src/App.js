@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import Modal from "./components/Dialog/dialog";
 
 function App() {
+  const [modalVisible, setModalVisible] = useState(false);
+  const modalConfig = {
+    visible: modalVisible,
+    closeModal: () => {
+      setModalVisible(false);
+    },
+  };
+
+  const modalChildren = (
+    <div className="dialog">
+      <span onClick={() => setModalVisible(false)} className="closeBtn">
+        x
+      </span>
+      <div>这里可以自定义内容</div>
+      <button onClick={() => setModalVisible(false)}>取消</button><button onClick={() => setModalVisible(false)}>确定</button>
+    </div>
+  );
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={() => setModalVisible(true)} className="openBtn">
+        open modal
+      </button>
+      <Modal {...modalConfig}>{modalChildren}</Modal>
     </div>
   );
 }
