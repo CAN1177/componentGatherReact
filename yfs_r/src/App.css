@@ -1,6 +1,8 @@
 /* App.css */
+.App{
+  padding: 0 24px
+}
 .openBtn {
-  margin-top: 240px;
   border: 1px solid dodgerblue;
 }
 

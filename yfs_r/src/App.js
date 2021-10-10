@@ -23,6 +23,8 @@ function App() {
 
   return (
     <div className="App">
+      {/* 贼丑的弹窗组件 */}
+      <h2>贼丑的弹窗组件</h2>
       <button onClick={() => setModalVisible(true)} className="openBtn">
         open modal
       </button>
