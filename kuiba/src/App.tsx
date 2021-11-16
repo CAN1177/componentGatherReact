@@ -1,21 +1,21 @@
-import React from 'react';
+import React from "react";
+import Button, { ButtonSize, ButtonType } from "./components/Button/button";
 
-// import './App.css';
+import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Hello World!</h1>
-        <h2>Hello World!</h2>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div className="App-btn">
+          <Button disabled>Hello</Button>
+          <Button btnType={ButtonType.Primary} size={ButtonSize.Large}>
+            Hello, 树🌲
+          </Button>
+          <Button btnType={ButtonType.Link} href="http://can1177.com">
+            俺的Blog
+          </Button>
+        </div>
       </header>
     </div>
   );
