@@ -12,7 +12,7 @@ function App() {
           <Button btnType={ButtonType.Primary} size={ButtonSize.Large} >
             Primary
           </Button>
-          <Button btnType={ButtonType.Danger} size={ButtonSize.Small}>
+          <Button btnType={ButtonType.Danger} onClick={(e) =>{alert("222")}}size={ButtonSize.Small}>
             Danger
           </Button>
           <Button btnType={ButtonType.Default} autoFocus size={ButtonSize.Small}>
