@@ -13,7 +13,7 @@ function App() {
         <div className="App-btn">
           <Menu onSelect={(index) =>{
             console.log('%c 🥡 index: ', 'font-size:20px;background-color: #FCA650;color:#fff;', index);
-          }} mode="vertical" defaultOpenSubMenus ={["1"]}>
+          }}  defaultOpenSubMenus ={["1"]}>
             <MenuItem>Item 1</MenuItem>
             <SubMenu title="Item 2">
               <MenuItem >Child 1</MenuItem>

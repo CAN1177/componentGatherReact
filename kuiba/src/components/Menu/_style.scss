@@ -28,7 +28,7 @@
     .submenu-title {
       display: flex;
       align-items: center;
-      color: black;
+      color: $body-color;
     }
     .arrow-icon {
       transition: transform .25s ease-in-out;
@@ -60,7 +60,7 @@
       padding: $menu-item-padding-y $menu-item-padding-x;
       cursor: pointer;
       transition: $menu-transition;
-      color: $body-color;
+      color: $gray-900;
       &.is-active, &:hover {
         color: $menu-item-active-color !important;
       }
@@ -73,6 +73,7 @@
 .menu-horizontal {
   >.menu-item {
     border-bottom: $menu-item-active-border-width solid transparent;
+    color: $gray-900;
   }
   .kuiba-submenu {
     position: absolute;
@@ -91,6 +92,7 @@
   border-right: $menu-border-width solid $menu-border-color;
   >.menu-item {
     border-left: $menu-item-active-border-width solid transparent;
+    color: $body-color;
     &.is-active, &:hover {
       border-bottom: 0px;
       border-left: $menu-item-active-border-width solid $menu-item-active-color;
