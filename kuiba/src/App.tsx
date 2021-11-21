@@ -1,16 +1,19 @@
 import React from "react";
-// import Button, { ButtonSize, ButtonType } from "./components/Button/button";
-
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
 import "./App.css";
 import Menu from "./components/Menu/menu";
 import MenuItem from "./components/Menu/menuItem";
 import SubMenu from "./components/Menu/subMenu"
+import Icon from "./components/Icon/icon";
 
+library.add(fas)
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <div className="App-btn">
+        <div className="App-btn" >
+          <Icon icon="fighter-jet"  theme="primary" size="4x" /> <span style={{fontSize:'40px'}}>Kuiba</span>
           <Menu onSelect={(index) =>{
             console.log('%c 🥡 index: ', 'font-size:20px;background-color: #FCA650;color:#fff;', index);
           }}  defaultOpenSubMenus ={["1"]}>
