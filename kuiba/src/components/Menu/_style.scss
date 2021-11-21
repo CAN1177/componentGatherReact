@@ -28,6 +28,7 @@
     .submenu-title {
       display: flex;
       align-items: center;
+      color: black;
     }
     .arrow-icon {
       transition: transform .25s ease-in-out;
@@ -49,12 +50,12 @@
       transform: rotate(180deg) !important;
     }
   }
-  .viking-submenu {
-    //display: none;
+  .kuiba-submenu {
+    display: none;
     list-style:none;
     padding-left: 0;
     white-space: nowrap;
-    //transition: $menu-transition;
+    transition: $menu-transition;
     .menu-item {
       padding: $menu-item-padding-y $menu-item-padding-x;
       cursor: pointer;
@@ -65,15 +66,15 @@
       }
     }
   }
-  .viking-submenu.menu-opened {
-    //display: block;
+  .kuiba-submenu.menu-opened {
+    display: block;
   }
 }
 .menu-horizontal {
   >.menu-item {
     border-bottom: $menu-item-active-border-width solid transparent;
   }
-  .viking-submenu {
+  .kuiba-submenu {
     position: absolute;
     background: $white;
     z-index: 100;

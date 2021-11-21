@@ -1,64 +1,75 @@
 import React, { useState, createContext } from "react";
 import classNames from "classnames";
-import { MenuItemProps } from './menuItem'
+import { MenuItemProps } from "./menuItem";
 
-type MenuModel = "horizontal" | "vertical";
-type SelectCallback = (selectIndex: number) => void;
+type MenuMode = "horizontal" | "vertical";
+type SelectCallback = (selectIndex: string) => void;
 
 export interface MenuProps {
-  defaultIndex?: number;
+  defaultIndex?: string;
   className?: string;
-  mode?: MenuModel;
+  mode?: MenuMode;
   style?: React.CSSProperties;
   //click menu callBack Function
   onSelect?: SelectCallback;
+  defaultOpenSubMenus?: string[]
 }
 
 interface IMenuContext {
-  index: number;
+  index: string;
   onSelect?: SelectCallback;
+  mode?: MenuMode;
+  defaultOpenSubMenus?: string[]
 }
 
-export const MenuContext = createContext<IMenuContext>({ index: 0 });
+export const MenuContext = createContext<IMenuContext>({ index: "0" });
 
 const Menu: React.FC<MenuProps> = (props) => {
-  const { className, mode, style, children, defaultIndex, onSelect } = props;
+  const { className, mode, style, children, defaultIndex, onSelect,   defaultOpenSubMenus } = props;
   const [curActive, setActive] = useState(defaultIndex);
 
   const classes = classNames("kuiba-menu", className, {
     "menu-vertical": mode === "vertical",
+    "menu-horizontal": mode !== "vertical",
   });
-  const handleClick = (index: number) => {
+  const handleClick = (index: string) => {
     setActive(index);
     if (onSelect) onSelect(index);
   };
   const passedContext: IMenuContext = {
-    index: curActive ? curActive : 0,
+    index: curActive ? curActive : "0",
     onSelect: handleClick,
+    mode: mode,
+    defaultOpenSubMenus:defaultOpenSubMenus
   };
 
- 
-  const renderChildren = ()=>{
-    return React.Children.map(children, (child, index)=>{
-      const childElement = child as React.FunctionComponentElement<MenuItemProps>
-      const { displayName } = childElement.type
-      if (displayName === "MenuItem") {
-        return React.cloneElement(childElement, { index})
-      }else {
-        console.error("Waring: Menu has a child which is not a MenuItem components!")
+  const renderChildren = () => {
+    return React.Children.map(children, (child, index) => {
+      const childElement =
+        child as React.FunctionComponentElement<MenuItemProps>;
+      const { displayName } = childElement.type;
+      if (displayName === "MenuItem" || displayName === "SubMenu") {
+        return React.cloneElement(childElement, { index: index.toString() });
+      } else {
+        console.error(
+          "Waring: Menu has a child which is not a MenuItem components!"
+        );
       }
-    })
-  }
+    });
+  };
 
   return (
     <ul className={classes} style={style}>
-      <MenuContext.Provider value={passedContext}>{renderChildren}</MenuContext.Provider>
+      <MenuContext.Provider value={passedContext}>
+        {renderChildren()}
+      </MenuContext.Provider>
     </ul>
   );
 };
 
 Menu.defaultProps = {
-  defaultIndex: 0,
+  defaultIndex: "0",
   mode: "horizontal",
+  defaultOpenSubMenus: []
 };
 export default Menu;
