@@ -84,7 +84,11 @@ const SubMenu: React.FC<SubMenuProps> = ({
     });
 
     return (
-      <Transition in={menuOpen} timeout={300} animation="zoom-in-top">
+      <Transition
+        in={menuOpen}
+        timeout={300}
+        animation="zoom-in-top"
+      >
         <ul className={subMenuClasses}>{childrenComponent}</ul>
       </Transition>
     );

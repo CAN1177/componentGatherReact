@@ -28,7 +28,6 @@
     .submenu-title {
       display: flex;
       align-items: center;
-      color: $body-color;
     }
     .arrow-icon {
       transition: transform .25s ease-in-out;
@@ -51,30 +50,28 @@
     }
   }
   .kuiba-submenu {
-    opacity: 0;
+    //display: none;
     list-style:none;
     padding-left: 0;
     white-space: nowrap;
-    transition: opacity .5s ease-in;
+    //transition: $menu-transition;
     .menu-item {
       padding: $menu-item-padding-y $menu-item-padding-x;
       cursor: pointer;
       transition: $menu-transition;
-      color: $gray-900;
+      color: $body-color;
       &.is-active, &:hover {
         color: $menu-item-active-color !important;
       }
     }
   }
   .kuiba-submenu.menu-opened {
-    display: block;
-    opacity: 1;
+    //display: block;
   }
 }
 .menu-horizontal {
   >.menu-item {
     border-bottom: $menu-item-active-border-width solid transparent;
-    color: $gray-900;
   }
   .kuiba-submenu {
     position: absolute;
@@ -93,7 +90,6 @@
   border-right: $menu-border-width solid $menu-border-color;
   >.menu-item {
     border-left: $menu-item-active-border-width solid transparent;
-    color: $body-color;
     &.is-active, &:hover {
       border-bottom: 0px;
       border-left: $menu-item-active-border-width solid $menu-item-active-color;

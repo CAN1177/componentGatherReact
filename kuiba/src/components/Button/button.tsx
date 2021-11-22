@@ -1,17 +1,21 @@
 import React from "react";
 import classNames from "classnames";
 
-export enum ButtonSize {
-  Large = "lg",
-  Small = "sm",
-}
+// export enum ButtonSize {
+//   Large = "lg",
+//   Small = "sm",
+// }
 
-export enum ButtonType {
-  Primary = "primary",
-  Default = "default",
-  Danger = "danger",
-  Link = "link",
-}
+// export enum ButtonType {
+//   Primary = "primary",
+//   Default = "default",
+//   Danger = "danger",
+//   Link = "link",
+// }
+
+// 枚举改字面量，便于添加
+export type ButtonSize = "lg" | "sm" ;
+export type ButtonType = "primary" | "danger" | "danger" | "link";
 
 interface BaseButtonProps {
   // ?: 为可选参数/属性
