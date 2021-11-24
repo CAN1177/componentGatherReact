@@ -15,7 +15,7 @@ import classNames from "classnames";
 
 // 枚举改字面量，便于添加
 export type ButtonSize = "lg" | "sm" ;
-export type ButtonType = "primary" | "danger" | "danger" | "link";
+export type ButtonType = "primary" | "default" | "danger" | "link";
 
 interface BaseButtonProps {
   // ?: 为可选参数/属性
@@ -44,11 +44,11 @@ const Button: React.FC<ButtonProps> = (props) => {
   const classes = classNames("btn", className, {
     [`btn-${btnType}`]: btnType,
     [`btn-${size}`]: size,
-    disabled: btnType === ButtonType.Link && disabled,
+    disabled: btnType === 'link' && disabled,
   });
 
   // 链接形式的button
-  if (btnType === ButtonType.Link && href) {
+  if (btnType === 'link' && href) {
     return (
       <a className={classes} href={href} {...restProps}>
         {children}
@@ -66,7 +66,7 @@ const Button: React.FC<ButtonProps> = (props) => {
 
 Button.defaultProps = {
   disabled: false,
-  btnType: ButtonType.Default,
+  btnType: 'default',
 };
 
 export default Button;
