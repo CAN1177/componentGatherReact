@@ -56,7 +56,7 @@ const Button: FC<ButtonProps> = (props) => {
 
 Button.defaultProps = {
   disabled: false,
-  btnType: 'default',
+  btnType: 'primary',
 };
 
 export default Button;
