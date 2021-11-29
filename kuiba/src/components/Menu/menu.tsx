@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, FC, FunctionComponentElement } from "react";
 import classNames from "classnames";
 import { MenuItemProps } from "./menuItem";
 
@@ -18,13 +18,14 @@ export interface MenuProps {
 interface IMenuContext {
   index: string;
   onSelect?: SelectCallback;
+  /** 设置Menu模式  */ 
   mode?: MenuMode;
   defaultOpenSubMenus?: string[]
 }
 
 export const MenuContext = createContext<IMenuContext>({ index: "0" });
 
-const Menu: React.FC<MenuProps> = (props) => {
+const Menu: FC<MenuProps> = (props) => {
   const { className, mode, style, children, defaultIndex, onSelect,   defaultOpenSubMenus } = props;
   const [curActive, setActive] = useState(defaultIndex);
 
@@ -46,7 +47,7 @@ const Menu: React.FC<MenuProps> = (props) => {
   const renderChildren = () => {
     return React.Children.map(children, (child, index) => {
       const childElement =
-        child as React.FunctionComponentElement<MenuItemProps>;
+        child as FunctionComponentElement<MenuItemProps>;
       const { displayName } = childElement.type;
       if (displayName === "MenuItem" || displayName === "SubMenu") {
         return React.cloneElement(childElement, { index: index.toString() });
