@@ -45,7 +45,19 @@ export const http = async (
 
 export const useHttp = () => {
   const { user } = useAuth();
-	 // 注意这里的ts操作符 Parameters<typeof http>
+	 // 注意这里的ts Utility Types ==> Parameters<typeof http> 
+   // Utility Type 用法 用泛型给他传入一个其他类型，然后Utility Type对其进行某种操作
   return (...[endpoint, config]: Parameters<typeof http>) =>
     http(endpoint, { ...config, token: user?.token });
 };
+
+
+
+// 举个🌰
+type Person = {
+  name: string;
+  age: number;
+}
+// const my: Person = {name: 'John'}
+const my: Partial<Person> = {name: 'John'}
+console.log('%c 🍅 my: ', 'font-size:20px;background-color: #EA7E5C;color:#fff;', my);
