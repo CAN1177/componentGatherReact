@@ -21,7 +21,7 @@ export const AuthProvider = ({children}:{children:ReactNode}) => {
   const [user, setUser] = useState<User | null>(null);
   
   const login = (form: AuthForm) =>
-    // auth.login(form).then((user) => setUser(user));
+    // auth.login(form).then((user) => setUser(user));  这就叫做 point free
     auth.login(form).then(setUser); 
  
   const register = (form: AuthForm) =>
