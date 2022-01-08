@@ -1,15 +1,19 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 
 // 前端避免改变传入的使用对象
 export const isFalse = (value: unknown) => value === 0 ? false : !value;
 
-export const cleanObject = (object: object) =>{
+
+// 避免删除可用属性，比如 {xxx: false}
+export const isVoid = (value: unknown) => value === undefined || value === null || value === ''
+
+
+export const cleanObject = (object: {[key: string]: unknown}) =>{
 	const result = {...object}
 	Object.keys(result).forEach(key =>{
-		// @ts-ignore
 		const  value = result[key]
-		if(isFalse(value)) {
-			// @ts-ignore
+		if(isVoid(value)) {
 			delete result[key]
 		}
 	})
