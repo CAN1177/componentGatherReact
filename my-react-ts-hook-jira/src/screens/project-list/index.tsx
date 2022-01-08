@@ -35,7 +35,7 @@ export const ProjectListScreen = () => {
     //   }
     // });
     client("projects", { data: cleanObject(debouncedParams) }).then(setList);
-  }, [client, debouncedParams]);
+  }, [debouncedParams]);
 
   useMount(() => {
     client("users").then(setUsers);
