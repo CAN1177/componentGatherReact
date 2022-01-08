@@ -1,6 +1,7 @@
+
 import React from "react";
 // import { useState, useEffect } from "react";
-import { Input, Select } from 'antd';
+import { Form, Input, Select } from "antd";
 
 export interface User {
   id: string;
@@ -20,12 +21,13 @@ interface SearchPanelProps {
   setParam: (param: SearchPanelProps["param"]) => void;
 }
 
-export const SearchPanel = ({ users, param, setParam }: SearchPanelProps ) => {
+export const SearchPanel = ({ users, param, setParam }: SearchPanelProps) => {
   return (
-    <form>
-      <div>
+    <Form layout={"inline"} style={{marginBottom: "1rem"}}>
+      <Form.Item>
         {/* setParam(Object.assign({}, param, {name: evt.target.value})) */}
         <Input
+          placeholder="Please enter project name"
           type="text"
           value={param.name}
           onChange={(evt) =>
@@ -35,6 +37,8 @@ export const SearchPanel = ({ users, param, setParam }: SearchPanelProps ) => {
             })
           }
         />
+      </Form.Item>
+      <Form.Item>
         <Select
           value={param.personId}
           onChange={(value) =>
@@ -51,7 +55,7 @@ export const SearchPanel = ({ users, param, setParam }: SearchPanelProps ) => {
             </option>
           ))}
         </Select>
-      </div>
-    </form>
+      </Form.Item>
+    </Form>
   );
 };
