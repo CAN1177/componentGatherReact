@@ -5,9 +5,10 @@ import React from "react";
 import { ProjectListScreen } from "screens/project-list";
 import { ReactComponent as SoftLogo } from "assets/software-logo.svg";
 import { Button, Dropdown, Menu } from "antd";
-import { Navigate, Route, Routes } from "react-router";
+import { Route, Routes } from "react-router";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ProjectScreen } from "screens/project";
+import { resetRoute } from "utils";
 
 export const AuthenticatedApp = () => {
   return (
@@ -21,6 +22,7 @@ export const AuthenticatedApp = () => {
                 path={"/projects/:projectId/*"}
                 element={<ProjectScreen />}
               />
+              <Route index element={<ProjectListScreen />} />
             </Routes>
           </Router>
       </Main>
@@ -35,7 +37,9 @@ const PageHeader = () => {
         <HeaderLeft gap={true}>
           {/* 直接以svg 格式渲染，避免直接渲染为图片 */}
           {/* <img src={softLogo} alt=""/> */}
-          <SoftLogo width={"18rem"} color={"rgb(38, 132, 255)"} />
+          <Button type="link" onClick={resetRoute}>
+            <SoftLogo width={"18rem"} color={"rgb(38, 132, 255)"} />
+          </Button>
           <h3>项目</h3>
           <h3>用户</h3>
         </HeaderLeft>
