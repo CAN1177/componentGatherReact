@@ -6,12 +6,20 @@ import styled from "@emotion/styled";
 import logo from "assets/logo.svg";
 import left from "assets/left.svg";
 import right from "assets/right.svg";
+import { useDocumentTitle } from "utils";
+// import {Helmet} from "react-helmet"
 
 export const UnauthenticatedApp = () => {
   const [isRegister, setRegister] = useState(false);
   const [error, setError] = useState<Error | null>(null)
+
+  useDocumentTitle("登录或者注册")
+
   return (
     <Container>
+      {/* <Helmet>
+        <title>登录或者注册</title>
+      </Helmet> */}
       <Header />
 			<Background />
       <ShadowCard>
