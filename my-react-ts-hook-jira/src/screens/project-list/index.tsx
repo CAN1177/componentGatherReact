@@ -8,11 +8,10 @@ import styled from "@emotion/styled";
 import { Typography } from "antd";
 import { useProjects } from "utils/project";
 import { useUsers } from "utils/user";
-// import { Helmet } from "react-helmet";
 
 export const ProjectListScreen = () => {
 
-  useDocumentTitle("项目列表")
+  useDocumentTitle("项目列表", false)
 
   const [param, setParam] = useState({
     name: "",
@@ -42,9 +41,6 @@ export const ProjectListScreen = () => {
 
   return (
     <Container>
-      {/* <Helmet>
-        <title>项目列表</title>
-      </Helmet> */}
       <h1>项目列表 </h1>
       <SearchPanel
         users={users || []}

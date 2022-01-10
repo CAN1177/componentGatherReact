@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 // 前端避免改变传入的使用对象
 export const isFalse = (value: unknown) => value === 0 ? false : !value;
@@ -43,7 +43,9 @@ export const useDebounce = <T>(value: T, delay: number) =>{
 
 export const useDocumentTitle = (title: string, keepOnUnmunt:boolean = true)=>{
 
-	const oldTitle = document.title;
+
+	//使用useRef代替闭包，实现keepOnUnmunt
+	const oldTitle = useRef(document.title).current;
 
 	useEffect(() => {
 		document.title = title;
@@ -55,6 +57,6 @@ export const useDocumentTitle = (title: string, keepOnUnmunt:boolean = true)=>{
 				document.title = oldTitle;
 			}
 		})
-	}, [])
+	}, [keepOnUnmunt, oldTitle])
 
 }
