@@ -5,13 +5,33 @@ import React from "react";
 import { ProjectListScreen } from "screens/project-list";
 import { ReactComponent as SoftLogo } from "assets/software-logo.svg";
 import { Button, Dropdown, Menu } from "antd";
+import { Navigate, Route, Routes } from "react-router";
+import { BrowserRouter as Router } from "react-router-dom";
+import { ProjectScreen } from "screens/project";
 
 export const AuthenticatedApp = () => {
-  const { logout, user} = useAuth();
-
   return (
     <Container>
-      <Header between={true}>
+      <PageHeader/>
+      <Main>
+        <Router>
+            <Routes>
+              <Route path={"/projects"} element={<ProjectListScreen />} />
+              <Route
+                path={"/projects/:projectId/*"}
+                element={<ProjectScreen />}
+              />
+            </Routes>
+          </Router>
+      </Main>
+    </Container>
+  );
+};
+
+const PageHeader = () => {
+  const { logout, user } = useAuth();
+  return (
+    <Header between={true}>
         <HeaderLeft gap={true}>
           {/* 直接以svg 格式渲染，避免直接渲染为图片 */}
           {/* <img src={softLogo} alt=""/> */}
@@ -36,14 +56,9 @@ export const AuthenticatedApp = () => {
                   </Button>
           </Dropdown>
         </HeaderRight>
-      </Header>
-      <Main>
-        <ProjectListScreen />
-      </Main>
-    </Container>
+    </Header>
   );
 };
-
 const Container = styled.div`
   height: 100vh;
 `;
