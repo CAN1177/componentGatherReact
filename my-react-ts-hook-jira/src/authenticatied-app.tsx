@@ -75,6 +75,10 @@ const Header = styled(Row)`
 const HeaderLeft = styled(Row)`
   display: flex;
   align-items: center;
+  button{
+    display: flex;
+    align-items: center;
+  }
 `;
 
 const HeaderRight = styled.div``;

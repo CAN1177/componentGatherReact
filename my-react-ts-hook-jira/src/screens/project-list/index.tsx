@@ -2,21 +2,19 @@
 import React from "react";
 import { List } from "./list"; // 列表
 import { SearchPanel } from "./search-panel"; // 搜索
-import { useState } from "react";
+// import { useState } from "react";
 import { useDebounce, useDocumentTitle } from "utils/index";
 import styled from "@emotion/styled";
 import { Typography } from "antd";
 import { useProjects } from "utils/project";
 import { useUsers } from "utils/user";
+import { useUrlQueryParam } from "utils/url";
 
 export const ProjectListScreen = () => {
-
   useDocumentTitle("项目列表", false)
 
-  const [param, setParam] = useState({
-    name: "",
-    personId: "",
-  });
+  // const [keys]= useState<('name'|'personId')[]>(['name', 'personId'])
+  const [param, setParam] = useUrlQueryParam(['name', 'personId'])
   const debouncedParams = useDebounce(param, 100);
   const { isLoading, error, data: list } = useProjects(debouncedParams);
   const { data: users } = useUsers();

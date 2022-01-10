@@ -6,6 +6,7 @@
  * @Description: In User Settings Edit
  * @FilePath: /react-hooks-ts-jai/my/src/index.tsx
  */
+import "./wdyr";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App'; 
