@@ -8,15 +8,17 @@ import styled from "@emotion/styled";
 import { Typography } from "antd";
 import { useProjects } from "utils/project";
 import { useUsers } from "utils/user";
-import { useUrlQueryParam } from "utils/url";
+import { useProjectsSearchParams } from "./util";
 
 export const ProjectListScreen = () => {
   useDocumentTitle("项目列表", false)
 
   // const [keys]= useState<('name'|'personId')[]>(['name', 'personId'])
-  const [param, setParam] = useUrlQueryParam(['name', 'personId'])
-  const debouncedParams = useDebounce(param, 100);
-  const { isLoading, error, data: list } = useProjects(debouncedParams);
+  
+  // const [param, setParam] = useUrlQueryParam(['name', 'personId'])
+  // const projectsParam = {...param, personId:Number(param.personId)}
+  const [param, setParam] =  useProjectsSearchParams()
+  const { isLoading, error, data: list } = useProjects(useDebounce(param, 100))
   const { data: users } = useUsers();
   // useEffect(() => {
   //   //用qs 代替多参数  fetch(`${apiUrl}/projects?name=${param.name}&personId=${param.id}`).then
