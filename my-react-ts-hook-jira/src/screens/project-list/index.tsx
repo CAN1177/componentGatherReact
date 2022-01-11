@@ -18,7 +18,7 @@ export const ProjectListScreen = () => {
   // const [param, setParam] = useUrlQueryParam(['name', 'personId'])
   // const projectsParam = {...param, personId:Number(param.personId)}
   const [param, setParam] =  useProjectsSearchParams()
-  const { isLoading, error, data: list } = useProjects(useDebounce(param, 100))
+  const { isLoading, error, data: list, retry} = useProjects(useDebounce(param, 100))
   const { data: users } = useUsers();
   // useEffect(() => {
   //   //用qs 代替多参数  fetch(`${apiUrl}/projects?name=${param.name}&personId=${param.id}`).then
@@ -39,7 +39,7 @@ export const ProjectListScreen = () => {
   //   // });
   // });
 
-  return (
+  return ( 
     <Container>
       <h1>项目列表 </h1>
       <SearchPanel
@@ -54,6 +54,7 @@ export const ProjectListScreen = () => {
         loading={isLoading}
         users={users || []}
         dataSource={list || []}
+        refresh={retry}
       ></List>
     </Container>
   );

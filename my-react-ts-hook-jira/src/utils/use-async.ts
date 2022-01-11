@@ -25,6 +25,10 @@ export const useAsync = <D>(initialState?: State<D>, initialConfig?: typeof defa
     ...initialState,
   });
 
+  const [retry, setRetry] = useState(()=>()=>{
+
+  })
+
   const setData = (data: D) =>
     setState({
       data,
@@ -40,10 +44,17 @@ export const useAsync = <D>(initialState?: State<D>, initialConfig?: typeof defa
     });
 
   // 用来触发异步请求
-  const run = (promise: Promise<D>) => {
+  const run = (promise: Promise<D>, runConfig?:{retry:()=>Promise<D>}) => {
     if (!promise || !promise.then) {
       throw new Error("请传入Promsie 类型数据");
     }
+
+    setRetry(() =>()=>{
+      if (runConfig?.retry) {
+        run(runConfig?.retry(), runConfig)
+      }
+    });
+
     setState({ ...state, status: "loading" });
 
     return promise
@@ -62,6 +73,8 @@ export const useAsync = <D>(initialState?: State<D>, initialConfig?: typeof defa
       });
   };
 
+
+
   return {
     isIdle: state.status === "idle",
     isLoading: state.status === "loading",
@@ -70,6 +83,8 @@ export const useAsync = <D>(initialState?: State<D>, initialConfig?: typeof defa
     run,
     setData,
     setError,
+    // 重新调用run() 刷新state
+    retry,
     ...state,
   };
 };
