@@ -78,3 +78,23 @@ export const subset = <
   );
   return Object.fromEntries(filteredEntries) as Pick<O, K>;
 };
+
+
+/**
+ *  返回组件的挂载状态， 如果还挂载或者已经挂载，返回false, 反之返回true
+ *  
+ * */ 
+
+export const useMountedRef=()=>{
+
+  const mountedRef = useRef(false);
+
+  useEffect(() => {
+    mountedRef.current = true;
+
+    return ()=>{
+      mountedRef.current = false;
+    }
+  })
+  return mountedRef
+}

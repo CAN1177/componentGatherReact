@@ -4,7 +4,7 @@ import React from "react";
 import { User } from "screens/project-list/search-panel";
 import { Link } from "react-router-dom";
 import { Pin } from "components/pin";
-import { useEditProject, useAddProject } from "utils/project";
+import { useEditProject } from "utils/project";
 export interface Project {
   id: number;
   name: string;
@@ -29,7 +29,7 @@ export const List = ({ users, ...props }: ListProps) => {
       pagination={false}
       columns={[
         {
-          title: <Pin checked={true} disabled={true} />,
+          title: <Pin checked={true} disabled={false} />,
           render(value, project) {
             return (
               <Pin
