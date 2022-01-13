@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useMountedRef } from "utils";
 
 interface State<D> {
@@ -13,68 +13,74 @@ const defaultInitialState: State<null> = {
   error: null,
 };
 
-
 const defaultConfig = {
-  throwOnError: false
-}
+  throwOnError: false,
+};
 
-
-export const useAsync = <D>(initialState?: State<D>, initialConfig?: typeof defaultConfig) => {
-  const config = {...defaultConfig, ...initialConfig};
+export const useAsync = <D>(
+  initialState?: State<D>,
+  initialConfig?: typeof defaultConfig
+) => {
+  const config = { ...defaultConfig, ...initialConfig };
   const [state, setState] = useState<State<D>>({
     ...defaultInitialState,
     ...initialState,
   });
 
+  const mountedRef = useMountedRef();
+  const [retry, setRetry] = useState(() => () => {});
+  const setData = useCallback(
+    (data: D) =>
+      setState({
+        data,
+        status: "success",
+        error: null,
+      }),
+    []
+  );
 
-  const mountedRef = useMountedRef()
-  const [retry, setRetry] = useState(()=>()=>{})
-  const setData = (data: D) =>
-    setState({
-      data,
-      status: "success",
-      error: null,
-    });
-
-  const setError = (error: Error) =>
-    setState({
-      error,
-      status: "error",
-      data: null,
-    });
+  const setError = useCallback(
+    (error: Error) =>
+      setState({
+        error,
+        status: "error",
+        data: null,
+      }),
+    []
+  );
 
   // 用来触发异步请求
-  const run = (promise: Promise<D>, runConfig?:{retry:()=>Promise<D>}) => {
-    if (!promise || !promise.then) {
-      throw new Error("请传入Promsie 类型数据");
-    }
-
-    setRetry(() =>()=>{
-      if (runConfig?.retry) {
-        run(runConfig?.retry(), runConfig)
+  const run = useCallback(
+    (promise: Promise<D>, runConfig?: { retry: () => Promise<D> }) => {
+      if (!promise || !promise.then) {
+        throw new Error("请传入Promsie 类型数据");
       }
-    });
 
-    setState({ ...state, status: "loading" });
-
-    return promise
-      .then((data) => {
-        if(mountedRef.current)
-          setData(data);
-        return data;
-      })
-      .catch((error) => {
-        // catch 会消化异常，不会主动抛出异常
-        setError(error);
-        // return error;
-        // 主动抛出异常
-        if (config.throwOnError) {
-          return Promise.reject(error);
+      setRetry(() => () => {
+        if (runConfig?.retry) {
+          run(runConfig?.retry(), runConfig);
         }
       });
-  };
 
+      setState(pervState=>({ ...pervState, status: "loading" }));
 
+      return promise
+        .then((data) => {
+          if (mountedRef.current) setData(data);
+          return data;
+        })
+        .catch((error) => {
+          // catch 会消化异常，不会主动抛出异常
+          setError(error);
+          // return error;
+          // 主动抛出异常
+          if (config.throwOnError) {
+            return Promise.reject(error);
+          }
+        });
+    },
+    [config.throwOnError, mountedRef, setData, setError]
+  );
 
   return {
     isIdle: state.status === "idle",
