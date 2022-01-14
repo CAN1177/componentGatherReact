@@ -13,59 +13,98 @@ import { ProjectModal } from "screens/project-list/project-modal";
 import { ProjectPopover } from "components/project-popover";
 
 export const AuthenticatedApp = () => {
-
-  const [projectModalOpen, setProjectModalOpen] = useState(false)
+  const [projectModalOpen, setProjectModalOpen] = useState(false);
 
   return (
     <Container>
-      <PageHeader setProjectModalOpen={setProjectModalOpen}/>
+      <PageHeader
+        projectButton={
+          <ButtonNoPadding
+            type={"link"}
+            onClick={() => setProjectModalOpen(true)}
+          >
+            创建项目
+          </ButtonNoPadding>
+        }
+      />
       <Main>
         <Router>
-            <Routes>
-              <Route path={"/projects"} element={<ProjectListScreen setProjectModalOpen={setProjectModalOpen} />} />
-              <Route
-                path={"/projects/:projectId/*"}
-                element={<ProjectScreen />}
-              />
-              <Route index element={<ProjectListScreen setProjectModalOpen={setProjectModalOpen} />} />
-            </Routes>
-          </Router>
+          <Routes>
+            <Route
+              path={"/projects"}
+              element={
+                <ProjectListScreen
+                  projectButton={
+                    <ButtonNoPadding
+                      type={"link"}
+                      onClick={() => setProjectModalOpen(true)}
+                    >
+                      创建项目
+                    </ButtonNoPadding>
+                  }
+                />
+              }
+            />
+            <Route
+              path={"/projects/:projectId/*"}
+              element={<ProjectScreen />}
+            />
+            <Route
+              index
+              element={
+                <ProjectListScreen
+                  projectButton={
+                    <ButtonNoPadding
+                      type={"link"}
+                      onClick={() => setProjectModalOpen(true)}
+                    >
+                      创建项目
+                    </ButtonNoPadding>
+                  }
+                />
+              }
+            />
+          </Routes>
+        </Router>
       </Main>
-      <ProjectModal projectModalOpen={projectModalOpen} onClose={()=>setProjectModalOpen(false)}/>
+      <ProjectModal
+        projectModalOpen={projectModalOpen}
+        onClose={() => setProjectModalOpen(false)}
+      />
     </Container>
   );
 };
 
-const PageHeader = (props: {setProjectModalOpen: (isOpen:boolean) =>void }) => {
+const PageHeader = (props: { projectButton: JSX.Element }) => {
   const { logout, user } = useAuth();
   return (
     <Header between={true}>
-        <HeaderLeft gap={true}>
-          {/* 直接以svg 格式渲染，避免直接渲染为图片 */}
-          {/* <img src={softLogo} alt=""/> */}
-          <Button type="link" onClick={resetRoute}>
-            <SoftLogo width={"18rem"} color={"rgb(38, 132, 255)"} />
-          </Button>
-          <ProjectPopover setProjectModalOpen={props.setProjectModalOpen}/>
-          <span>用户</span>
-        </HeaderLeft>
-        <HeaderRight>
-          <Dropdown
-            overlay={
-              <Menu>
-                <Menu.Item key={"logout"}>
-                  <Button type={"link"} onClick={logout}>
-                    登出
-                  </Button>
-                </Menu.Item>
-              </Menu>
-            }
-          >
-             <ButtonNoPadding type={"link"} onClick={e=>e.preventDefault()}>
-                    Hi, {user?.name}
-                  </ButtonNoPadding>
-          </Dropdown>
-        </HeaderRight>
+      <HeaderLeft gap={true}>
+        {/* 直接以svg 格式渲染，避免直接渲染为图片 */}
+        {/* <img src={softLogo} alt=""/> */}
+        <Button type="link" onClick={resetRoute}>
+          <SoftLogo width={"18rem"} color={"rgb(38, 132, 255)"} />
+        </Button>
+        <ProjectPopover {...props} />
+        <span>用户</span>
+      </HeaderLeft>
+      <HeaderRight>
+        <Dropdown
+          overlay={
+            <Menu>
+              <Menu.Item key={"logout"}>
+                <Button type={"link"} onClick={logout}>
+                  登出
+                </Button>
+              </Menu.Item>
+            </Menu>
+          }
+        >
+          <ButtonNoPadding type={"link"} onClick={(e) => e.preventDefault()}>
+            Hi, {user?.name}
+          </ButtonNoPadding>
+        </Dropdown>
+      </HeaderRight>
     </Header>
   );
 };
@@ -81,7 +120,7 @@ const Header = styled(Row)`
 const HeaderLeft = styled(Row)`
   display: flex;
   align-items: center;
-  button{
+  button {
     display: flex;
     align-items: center;
   }
