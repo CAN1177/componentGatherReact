@@ -54,11 +54,11 @@ export const useHttp = () => {
 
 
 
-// 举个🌰
-type Person = {
-  name: string;
-  age: number;
-}
-// const my: Person = {name: 'John'}
-const my: Partial<Person> = {name: 'John'}
-console.log('%c 🍅 my: ', 'font-size:20px;background-color: #EA7E5C;color:#fff;', my);
+// // 举个🌰
+// type Person = {
+//   name: string;
+//   age: number;
+// }
+// // const my: Person = {name: 'John'}
+// const my: Partial<Person> = {name: 'John'}
+// console.log('%c 🍅 my: ', 'font-size:20px;background-color: #EA7E5C;color:#fff;', my);

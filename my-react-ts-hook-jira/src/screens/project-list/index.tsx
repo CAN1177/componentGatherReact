@@ -2,15 +2,14 @@
 import React from "react";
 import { List } from "./list"; // 列表
 import { SearchPanel } from "./search-panel"; // 搜索
-// import { useState } from "react";
 import { useDebounce, useDocumentTitle } from "utils/index";
 import styled from "@emotion/styled";
-import { Typography } from "antd";
+import { Button, Row, Typography } from "antd";
 import { useProjects } from "utils/project";
 import { useUsers } from "utils/user";
 import { useProjectsSearchParams } from "./util";
 
-export const ProjectListScreen = () => {
+export const ProjectListScreen = (props: {setProjectModalOpen: (isOpen: boolean) => void}) => {
   useDocumentTitle("项目列表", false)
 
   // const [keys]= useState<('name'|'personId')[]>(['name', 'personId'])
@@ -41,7 +40,10 @@ export const ProjectListScreen = () => {
 
   return ( 
     <Container>
-      <h1>项目列表 </h1>
+      <Row style={{display: 'flex', justifyContent: 'space-between'}}>
+        <h1>项目列表 </h1>
+        <Button onClick={()=>props.setProjectModalOpen(true)}>创建项目</Button>
+      </Row>
       <SearchPanel
         users={users || []}
         param={param}
@@ -51,6 +53,7 @@ export const ProjectListScreen = () => {
         <Typography.Text type={"danger"}>{error.message}</Typography.Text>
       ) : null}
       <List
+        setProjectModalOpen={props.setProjectModalOpen}
         loading={isLoading}
         users={users || []}
         dataSource={list || []}

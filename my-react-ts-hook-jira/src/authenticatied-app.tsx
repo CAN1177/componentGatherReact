@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import { Row } from "components/lib";
+import { ButtonNoPadding, Row } from "components/lib";
 import { useAuth } from "context/auth-context";
-import React from "react";
+import React, { useState } from "react";
 import { ProjectListScreen } from "screens/project-list";
 import { ReactComponent as SoftLogo } from "assets/software-logo.svg";
 import { Button, Dropdown, Menu } from "antd";
@@ -9,28 +9,34 @@ import { Route, Routes } from "react-router";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ProjectScreen } from "screens/project";
 import { resetRoute } from "utils";
+import { ProjectModal } from "screens/project-list/project-modal";
+import { ProjectPopover } from "components/project-popover";
 
 export const AuthenticatedApp = () => {
+
+  const [projectModalOpen, setProjectModalOpen] = useState(false)
+
   return (
     <Container>
-      <PageHeader/>
+      <PageHeader setProjectModalOpen={setProjectModalOpen}/>
       <Main>
         <Router>
             <Routes>
-              <Route path={"/projects"} element={<ProjectListScreen />} />
+              <Route path={"/projects"} element={<ProjectListScreen setProjectModalOpen={setProjectModalOpen} />} />
               <Route
                 path={"/projects/:projectId/*"}
                 element={<ProjectScreen />}
               />
-              <Route index element={<ProjectListScreen />} />
+              <Route index element={<ProjectListScreen setProjectModalOpen={setProjectModalOpen} />} />
             </Routes>
           </Router>
       </Main>
+      <ProjectModal projectModalOpen={projectModalOpen} onClose={()=>setProjectModalOpen(false)}/>
     </Container>
   );
 };
 
-const PageHeader = () => {
+const PageHeader = (props: {setProjectModalOpen: (isOpen:boolean) =>void }) => {
   const { logout, user } = useAuth();
   return (
     <Header between={true}>
@@ -40,8 +46,8 @@ const PageHeader = () => {
           <Button type="link" onClick={resetRoute}>
             <SoftLogo width={"18rem"} color={"rgb(38, 132, 255)"} />
           </Button>
-          <h3>项目</h3>
-          <h3>用户</h3>
+          <ProjectPopover setProjectModalOpen={props.setProjectModalOpen}/>
+          <span>用户</span>
         </HeaderLeft>
         <HeaderRight>
           <Dropdown
@@ -55,9 +61,9 @@ const PageHeader = () => {
               </Menu>
             }
           >
-             <Button type={"link"} onClick={e=>e.preventDefault()}>
+             <ButtonNoPadding type={"link"} onClick={e=>e.preventDefault()}>
                     Hi, {user?.name}
-                  </Button>
+                  </ButtonNoPadding>
           </Dropdown>
         </HeaderRight>
     </Header>
