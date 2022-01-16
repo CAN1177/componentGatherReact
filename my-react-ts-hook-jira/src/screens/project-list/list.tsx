@@ -17,8 +17,7 @@ export interface Project {
 
 interface ListProps extends TableProps<Project> {
   users: User[];
-  refresh?: ()=>void;
-  projectButton: JSX.Element
+  refresh?: ()=>void
 }
 
 export const List = ({ users, ...props }: ListProps) => {
@@ -86,7 +85,6 @@ export const List = ({ users, ...props }: ListProps) => {
             return (
               <Dropdown overlay={<Menu>
                 <Menu.Item key={'edit'}>
-                  <ButtonNoPadding type={"text"} onClick={() =>props.projectButton}>编辑</ButtonNoPadding>
                 </Menu.Item>
               </Menu>} >
                 <ButtonNoPadding type={"link"} >...</ButtonNoPadding>

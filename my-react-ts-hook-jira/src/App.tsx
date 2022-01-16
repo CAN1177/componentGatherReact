@@ -1,4 +1,4 @@
-import { AuthenticatedApp } from "authenticatied-app";
+import { AuthenticatedApp } from "authenticated-app";
 import { ErrorBoundary } from "components/error-boundary";
 import { FullPageErrorFallback } from "components/lib";
 import { useAuth } from "context/auth-context";
