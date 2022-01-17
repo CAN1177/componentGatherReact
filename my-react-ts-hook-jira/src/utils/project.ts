@@ -2,7 +2,9 @@ import { Project } from "screens/project-list/list";
 // import { useCallback, useEffect } from "react";
 // import { cleanObject } from "utils/index";
 import { useHttp } from "utils/http";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { QueryKey, useMutation, useQuery } from "react-query";
+// import { useProjectsSearchParams } from "screens/project-list/util";
+import { useAddConfig, useDeleteConfig, useEditConfig } from "./use-optimistic-options";
 
 export const useProjects = (param?: Partial<Project>) => {
   const client = useHttp();
@@ -25,10 +27,10 @@ export const useProjects = (param?: Partial<Project>) => {
 
 
 
-export const useEditProject = () =>{
+export const useEditProject = (queryKey: QueryKey) =>{
   // const { run, ...asyncResult } = useAsync();
   const client = useHttp()
-  const queryClient = useQueryClient()
+  // const queryClient = useQueryClient()
   // const mutate = (params: Partial<Project>) =>{
   //   return run(client(`projects/${params.id}`, {
   //     method: 'PATCH',
@@ -42,16 +44,15 @@ export const useEditProject = () =>{
      client(`projects/${params.id}`,{
       method: 'PATCH',
       data: params
-    }), {
-      // 监听保持页面刷新
-      onSuccess: ()=>queryClient.invalidateQueries("projects")
-    });
+    }),
+      useEditConfig(queryKey)
+    );
 }
 
-export const useAddProject = () =>{
+export const useAddProject = (queryKey: QueryKey) =>{
   // const { run, ...asyncResult } = useAsync();
   const client = useHttp()
-  const queryClient = useQueryClient()
+  // const queryClient = useQueryClient()
   // const mutate = (params: Partial<Project>) =>{
   //   return run(client(`projects/${params.id}`, {
   //     method: 'POST',
@@ -66,11 +67,28 @@ export const useAddProject = () =>{
      client(`projects`,{
       method: 'POST',
       data: params
-    }), {
-      // 监听保持页面刷新
-      onSuccess: ()=>queryClient.invalidateQueries("projects")
-    });
+    }), 
+    // {
+    //   // 监听保持页面刷新
+    //   onSuccess: ()=>queryClient.invalidateQueries("projects")
+    // }
+    useAddConfig(queryKey)
+    )
+    ;
 }
+
+export const useDeleteProject = (queryKey: QueryKey) => {
+  const client = useHttp();
+
+  return useMutation(
+    ({ id }: { id: number }) =>
+      client(`projects/${id}`, {
+        method: "DELETE",
+      }),
+    useDeleteConfig(queryKey)
+  );
+};
+
 
 
 export const useProject = (id?:number)=> {
