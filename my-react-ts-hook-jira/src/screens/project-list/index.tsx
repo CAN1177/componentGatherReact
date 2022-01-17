@@ -4,17 +4,17 @@ import { List } from "./list"; // 列表
 import { SearchPanel } from "./search-panel"; // 搜索
 import { useDebounce, useDocumentTitle } from "utils/index";
 import styled from "@emotion/styled";
-import { Row, Typography } from "antd";
+import { Row } from "antd";
 import { useProjects } from "utils/project";
 import { useUsers } from "utils/user";
 import { useProjectModal, useProjectsSearchParams } from "./util";
-import { ButtonNoPadding } from "components/lib";
+import { ButtonNoPadding, ErrorBox } from "components/lib";
 
 export const ProjectListScreen = () => {
   useDocumentTitle("项目列表", false)
   const { open } = useProjectModal();
   const [param, setParam] =  useProjectsSearchParams()
-  const { isLoading, error, data: list, retry} = useProjects(useDebounce(param, 100))
+  const { isLoading, error, data: list} = useProjects(useDebounce(param, 100))
   const { data: users } = useUsers();
 
   return ( 
@@ -33,14 +33,11 @@ export const ProjectListScreen = () => {
         param={param}
         setParam={setParam}
       ></SearchPanel>
-      {error ? (
-        <Typography.Text type={"danger"}>{error.message}</Typography.Text>
-      ) : null}
+     <ErrorBox error={error}/>
       <List
         loading={isLoading}
         users={users || []}
         dataSource={list || []}
-        refresh={retry}
       ></List>
     </Container>
   );
