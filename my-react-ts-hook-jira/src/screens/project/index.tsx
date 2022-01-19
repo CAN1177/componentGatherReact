@@ -27,9 +27,7 @@ export const ProjectScreen = () => {
       </Aside>
       <Main>
         <Routes>
-          {/*projects/:projectId/kanban*/}
           <Route path={"kanban"} element={<KanbanScreen />} />
-          {/*projects/:projectId/epic*/}
           <Route path={"epic"} element={<EpicScreen />} />
           <Route index element={<KanbanScreen />} />
         </Routes>
@@ -47,6 +45,7 @@ const Main = styled.div`
   box-shadow: -5px 0 5px -5px rgba(0, 0, 0, 0.1);
   display: flex;
   overflow: hidden;
+  padding: 0 3.2rem;
 `;
 
 const Container = styled.div`

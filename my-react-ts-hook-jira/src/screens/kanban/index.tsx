@@ -25,6 +25,7 @@ export const KanbanScreen = () => {
 
 const ColumnContainer = styled.div`
   display: flex;
-  overflow: hidden;
-  margin-right: 2rem;
+  overflow-x: scroll; 
+  flex: 1
 `;
+ 
