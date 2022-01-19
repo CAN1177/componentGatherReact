@@ -1,4 +1,4 @@
-import { Project } from "screens/project-list/list";
+import { Project } from "../types/project";
 // import { useCallback, useEffect } from "react";
 // import { cleanObject } from "utils/index";
 import { useHttp } from "utils/http";
