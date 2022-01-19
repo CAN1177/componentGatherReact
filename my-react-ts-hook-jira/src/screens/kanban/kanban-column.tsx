@@ -52,14 +52,15 @@ export const KanbanColumn = React.forwardRef<
   const tasks = allTasks?.filter((task) => task.kanbanId === kanban.id);
   return (
     <Container {...props} ref={ref}>
-      <h3>{kanban.name}</h3>
+      <Row between={true}>
+        <h3>{kanban.name}</h3>
+        <More kanban={kanban} key={kanban.id} />
+      </Row>
       <TasksContainer>
         {tasks?.map((task) => (
-          <div>
-            {task.name}
             <TaskCard key={task.id} task={task} />
-          </div>
         ))}
+        <CreateTask kanbanId={kanban.id} />
       </TasksContainer>
 
       {/* <Row between={true}>

@@ -39,7 +39,7 @@ const PageHeader = () => {
   const { logout, user } = useAuth();
   return (
     <Header between={true}>
-      <HeaderLeft gap={true}>
+      <HeaderLeft gap={true} style={{cursor: 'pointer'}}>
         {/* 直接以svg 格式渲染，避免直接渲染为图片 */}
         {/* <img src={softLogo} alt=""/> */}
         <Button type="link" onClick={resetRoute}>
