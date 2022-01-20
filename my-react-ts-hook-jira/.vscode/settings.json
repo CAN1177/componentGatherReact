@@ -3,6 +3,7 @@
 		"antd",
 		"cpassword",
 		"Kanban",
-		"kanbans"
+		"kanbans",
+		"predeploy"
 	]
 }
