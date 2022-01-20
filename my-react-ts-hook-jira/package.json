@@ -37,7 +37,7 @@
     "eject": "react-scripts eject",
     "json-server": "json-server  __json_server_mock__/db.json --watch  --port 3001 --middlewares ./__json_server_mock__/middleware.js",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build -r git@github.com:21Sliva/21Sliva.github.io.git -b main"
+    "deploy": "gh-pages -d build -r git@github.com:CAN1177/can1177.github.io.git -b main"
   },
   "eslintConfig": {
     "extends": [
