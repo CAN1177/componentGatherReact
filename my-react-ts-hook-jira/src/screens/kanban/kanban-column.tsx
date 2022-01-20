@@ -52,7 +52,7 @@ export const KanbanColumn = React.forwardRef<
   const tasks = allTasks?.filter((task) => task.kanbanId === kanban.id);
   return (
     <Container {...props} ref={ref}>
-      <Row between={true}>
+      {/* <Row between={true}>
         <h3>{kanban.name}</h3>
         <More kanban={kanban} key={kanban.id} />
       </Row>
@@ -61,9 +61,9 @@ export const KanbanColumn = React.forwardRef<
             <TaskCard key={task.id} task={task} />
         ))}
         <CreateTask kanbanId={kanban.id} />
-      </TasksContainer>
+      </TasksContainer> */}
 
-      {/* <Row between={true}>
+      <Row between={true}>
         <h3>{kanban.name}</h3>
         <More kanban={kanban} key={kanban.id} />
       </Row>
@@ -88,7 +88,7 @@ export const KanbanColumn = React.forwardRef<
           </DropChild>
         </Drop>
         <CreateTask kanbanId={kanban.id} />
-      </TasksContainer> */}
+      </TasksContainer>
     </Container>
   );
 });

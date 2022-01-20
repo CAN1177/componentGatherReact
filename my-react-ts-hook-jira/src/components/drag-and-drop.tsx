@@ -31,6 +31,7 @@ type DropChildProps = Partial<
   { provided: DroppableProvided } & DroppableProvidedProps
 > &
   React.HTMLAttributes<HTMLDivElement>;
+  // React.forwardRef 可以使用ref功能，一般常用于自定义组件
 export const DropChild = React.forwardRef<HTMLDivElement, DropChildProps>(
   ({ children, ...props }, ref) => (
     <div ref={ref} {...props}>
