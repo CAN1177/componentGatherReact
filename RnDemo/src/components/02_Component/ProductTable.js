@@ -19,8 +19,8 @@ export default function ProductTable({products}) {
   return (
     <View style={{marginTop: 10}}>
       <View style={{flexDirection: 'row'}}>
-        <Text style={{flex: 1, fontWeight: 'bold'}}>名称</Text>
-        <Text style={{width: 50, fontWeight: 'bold'}}>价格</Text>
+        <Text style={{flex: 1, fontWeight: 'bold'}}>名称Name</Text>
+        <Text style={{width: 50, fontWeight: 'bold'}}>价格$</Text>
       </View>
       <View>{rows}</View>
     </View>
