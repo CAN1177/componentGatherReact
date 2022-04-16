@@ -3,6 +3,8 @@ import React from 'react';
 import {SafeAreaView, View, Image, Text, StyleSheet} from 'react-native';
 import ProductTable from './src/components/02_Component/ProductTable';
 
+import ProductTable1 from './src/components/04_state/ProductTable';
+
 const PRODUCTS = [
   {category: '水果', price: '￥1', name: '香蕉🍌'},
   {category: '水果', price: '￥1', name: '火龙果🐲'},
@@ -14,7 +16,7 @@ const PRODUCTS = [
 
 export default function App() {
   return (
-    <SafeAreaView style={{marginHorizontal: 30}}>
+    <SafeAreaView style={{marginHorizontal: 30, flex: 1}}>
       <ProductTable products={PRODUCTS} />
       <View style={styles.container}>
         <Image
@@ -25,6 +27,7 @@ export default function App() {
         />
         <Text style={styles.container.name_text}>教父</Text>
       </View>
+      <ProductTable1 />
     </SafeAreaView>
   );
 }
