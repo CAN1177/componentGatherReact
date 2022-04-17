@@ -46,6 +46,9 @@ export default function ProductTable() {
       {name: 'Sausage', price: '590', count: 5, id: 0},
       {name: 'Bacon', price: '171.00', count: 6, id: 1},
       {name: 'Hat', price: '718', count: 9, id: 2},
+      {name: 'Sausage', price: '590', count: 5, id: 3},
+      {name: 'Bacon', price: '171.00', count: 6, id: 4},
+      {name: 'Hat', price: '718', count: 9, id: 5},
     ];
     setRequestStatus(RequestStatus.SUCCESS);
     setProducts(products);
