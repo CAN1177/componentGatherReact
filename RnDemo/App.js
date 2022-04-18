@@ -11,7 +11,9 @@ import {
 } from 'react-native';
 import ProductTable from './src/components/02_Component/ProductTable';
 
-import ProductTable1 from './src/components/04_state/ProductTable';
+import ProductTable1 from './src/components/04_State/ProductTable';
+
+import TextInputDemo from './src/components/07_TextInput';
 
 // import Image2 from './src/components/05_Image/index';
 
@@ -32,7 +34,7 @@ export default function App() {
         flex: 1,
         paddingTop: StatusBar.currentHeight,
       }}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <ProductTable products={PRODUCTS} />
         <View style={styles.container}>
           <Image
@@ -44,6 +46,7 @@ export default function App() {
           <Text style={styles.container.name_text}>教父</Text>
         </View>
         <ProductTable1 />
+        <TextInputDemo />
       </ScrollView>
     </SafeAreaView>
   );
