@@ -15,6 +15,11 @@ import ProductTable1 from './src/components/04_State/ProductTable';
 
 import TextInputDemo from './src/components/07_TextInput';
 
+import ScrollViewExample from './src/components/08_List/ScrollViewExample';
+
+import FlatListExample from './src/components/08_List/FlatListExample';
+import RecycleTestComponent from './src/components/08_List/RecycleListViewExample';
+
 // import Image2 from './src/components/05_Image/index';
 
 const PRODUCTS = [
@@ -33,10 +38,11 @@ export default function App() {
         marginHorizontal: 30,
         flex: 1,
         paddingTop: StatusBar.currentHeight,
+        height: StatusBar.currentHeight,
       }}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <ProductTable products={PRODUCTS} />
-        <View style={styles.container}>
+        {/* <View style={styles.container}>
           <Image
             style={styles.container.img}
             source={{
@@ -44,27 +50,31 @@ export default function App() {
             }}
           />
           <Text style={styles.container.name_text}>教父</Text>
-        </View>
+        </View> */}
         <ProductTable1 />
-        <TextInputDemo />
+        {/* <TextInputDemo /> */}
       </ScrollView>
+      {/* List 无限滚动列表合集 */}
+      {/* <ScrollViewExample /> */}
+      {/* <FlatListExample /> */}
+      <RecycleTestComponent />
     </SafeAreaView>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    img: {
-      width: 100,
-      height: 100,
-      borderRadius: 50,
-    },
-    name_text: {
-      flex: 1,
-      fontSize: 18,
-      marginLeft: 10,
-      color: 'black',
-    },
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     img: {
+//       width: 100,
+//       height: 100,
+//       borderRadius: 50,
+//     },
+//     name_text: {
+//       flex: 1,
+//       fontSize: 18,
+//       marginLeft: 10,
+//       color: 'black',
+//     },
+//   },
+// });
